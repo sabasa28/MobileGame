@@ -53,6 +53,7 @@ public class LevelManager : MonoBehaviour
     public bool CheckOnOutOfBalls()
     {
         ballsUsed++;
+        uiGameplay.UpdateBallsLeft(startingBalls - ballsUsed);
         if (ballsUsed < startingBalls)
             return false;
         else

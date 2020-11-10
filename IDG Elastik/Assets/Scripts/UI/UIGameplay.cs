@@ -67,12 +67,16 @@ public class UIGameplay : MonoBehaviour
 
     public void OnNextButtonClick()
     {
-        GameManager.Get().LoadNextLevel();
+        LevelManager lvlMngr = LevelManager.Get();
+        GameManager gMngr = GameManager.Get();
+        int nextLvl = lvlMngr.GetLvlNum() + 1;
+        if (nextLvl > gMngr.allLevels) OnMenuButtonClick();
+        else gMngr.LoadSpecificScene(lvlMngr.GetLvlNum() + 1);
     }
 
     public void OnMenuButtonClick()
     {
-        GameManager.Get().LoadSpecificScene(0);
+        GameManager.Get().LoadSpecificScene(11);
     }
     public void OnRestartButtonClick()
     {

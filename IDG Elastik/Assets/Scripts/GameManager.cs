@@ -7,6 +7,7 @@ public class GameManager : MonoBehaviour
 {
     private static GameManager instance;
     public int levelsPassed = 0;
+    public int allLevels = 10;
     private void Awake()
     {
         if (instance != null)
@@ -22,12 +23,6 @@ public class GameManager : MonoBehaviour
         return instance;
     }
     public int nextSceneToLoad;
-    public void LoadNextLevel()
-    {
-        levelsPassed++;
-        nextSceneToLoad = levelsPassed;
-        SceneManager.LoadScene("LoadingScene");
-    }
     public void LoadSpecificScene(int nextSceneNum)
     {
         nextSceneToLoad = nextSceneNum;
