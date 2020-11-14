@@ -57,7 +57,7 @@ public class LevelManager : MonoBehaviour
         if (ballsUsed < startingBalls)
             return false;
         else
-        { 
+        {
             uiGameplay.OnLevelFinished(false);
             return true;
         }

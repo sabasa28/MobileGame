@@ -10,11 +10,10 @@ public class UIGameplay : MonoBehaviour
     [SerializeField] TextMeshProUGUI ballsLeftText = null;
     [SerializeField] TextMeshProUGUI resultText = null;
     [SerializeField] GameObject resultPanel = null;
-    [SerializeField] Button pauseButton = null;
     [SerializeField] Button nextLevelButton = null;
     [SerializeField] Player player = null;
-    string lvlCompletedText = "Level Completed";
-    string lvlFailedText = "Level Failed";
+    readonly string lvlCompletedText = "Level Completed";
+    readonly string lvlFailedText = "Level Failed";
 
     public void OnLevelFinished(bool win)
     {

@@ -24,7 +24,7 @@ public class Ball : MonoBehaviour
     {
         if (collision.CompareTag(CupTag))
         {
-            intoCup = true;  
+            intoCup = true;
         }
     }
     public void Detach()
@@ -36,6 +36,7 @@ public class Ball : MonoBehaviour
     IEnumerator ResetAfterTime()
     {
         yield return new WaitUntil(()=> timeLoose >= timeBeforeDestroying || transform.position.y < minPosY|| intoCup == true);
+        yield return new WaitForFixedUpdate(); //wait for score to be added
         if (!LevelManager.Get().CheckOnOutOfBalls())
             Attach();
     }

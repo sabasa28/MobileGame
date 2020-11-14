@@ -1,0 +1,3 @@
+include ':MegaLoader'
+include ':app'
+rootProject.name = "Loader"
