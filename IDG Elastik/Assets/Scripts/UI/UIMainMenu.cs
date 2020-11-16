@@ -7,7 +7,7 @@ public class UIMainMenu : MonoBehaviour
 {
     [SerializeField] GameObject lvlSelec = null;
     [SerializeField] GameObject credits = null;
-    [SerializeField] GameObject options = null;
+    [SerializeField] GameObject instructions = null;
 
 
     public void OpenLevelSelector()
@@ -29,14 +29,14 @@ public class UIMainMenu : MonoBehaviour
     {
         credits.SetActive(false);
     }
-    public void ShowOptions()
+    public void ShowInstructions()
     {
-        options.SetActive(true);
+        instructions.SetActive(true);
     }
 
-    public void HideOptions()
+    public void HideInstructions()
     {
-        options.SetActive(false);
+        instructions.SetActive(false);
     }
 
     public void CloseApplication()

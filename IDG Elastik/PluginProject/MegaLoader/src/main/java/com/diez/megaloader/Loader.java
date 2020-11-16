@@ -1,6 +1,5 @@
 package com.diez.megaloader;
 
-import android.content.Context;
 import android.util.Log;
 import android.app.Activity;
 
@@ -9,25 +8,22 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
-
 public class Loader {
-    private static final String LOADER_TAG = "IDGLoader";
-
     private static Loader _instance = null;
     public static Activity mainActivity;
 
     public static Loader getInstance()
     {
         if (_instance == null) {
-            Log.d(LOADER_TAG,"Loader created");
             _instance = new Loader();
         }
         return _instance;
     }
 
-    public void saveMaxLevel(int maxLvl, Context context)
+    public void saveMaxLevel(int maxLvl)
     {
-        File path = context.getFilesDir();
+        File path = mainActivity.getFilesDir();
+        //File path = context.getFilesDir();
         File file = new File(path, "maxlvl.txt");
 
         try
@@ -48,9 +44,9 @@ public class Loader {
         }
     }
 
-    public int getMaxLvl(Context context)
+    public int getMaxLevel()
     {
-        File path = context.getFilesDir();
+        File path = mainActivity.getFilesDir();
 
         File file = new File(path, "maxlvl.txt");
         if (!file.exists()) return 0;

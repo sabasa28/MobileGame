@@ -4,6 +4,28 @@ using UnityEngine;
 
 public class PluginManager : MonoBehaviour
 {
+    private static PluginManager instance;
+    private void Awake()
+    {
+        if (instance != null)
+        {
+            Destroy(gameObject);
+            return;
+        }
+        instance = this;
+        DontDestroyOnLoad(gameObject);
+    }
+    public static PluginManager Get()
+    {
+        return instance;
+    }
+
+    private void OnDestroy()
+    {
+        if (instance == this)
+            instance = null;
+    }
+
     const string PLUGIN_NAME = "com.diez.megaloader.Loader";
     static AndroidJavaClass _pluginClass = null;
 
@@ -34,28 +56,14 @@ public class PluginManager : MonoBehaviour
         }
     }
 
-    public int TestPlugin(int maxLvl)
+    public int GetLvlsPassed()
     {
-
-        if (Application.platform != RuntimePlatform.Android)
-        {
-            Debug.LogWarning("You are not in android platform");
-            return 9;//test
-        }
-        Save(maxLvl);
-        return Load();
+        return PluginInstance.Call<int>("getMaxLevel");
     }
 
-    int Load()
+    public void SaveLvlsPassed(int maxLvl)
     {
-        AndroidJavaObject context = PluginClass.CallStatic<AndroidJavaObject>("mainActivity");
-        return PluginInstance.Call<int>("getMaxLvl", context);
-    }
-
-    void Save(int maxLvl)
-    {
-        AndroidJavaObject activity = PluginClass.GetStatic<AndroidJavaObject>("mainActivity");
-        PluginInstance.Call<int>("saveMaxLevel", new object[] { maxLvl,activity });
+        PluginInstance.Call("saveMaxLevel", maxLvl);
     }
 
 }

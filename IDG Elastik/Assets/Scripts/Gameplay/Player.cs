@@ -64,7 +64,11 @@ public class Player : MonoBehaviour
     IEnumerator Bounce()
     {
         animator.SetBool("Bouncing",true);
+#if UNITY_ANDROID
+#if !UNITY_EDITOR
         Handheld.Vibrate();
+#endif
+#endif
         sound.Play();
         yield return new WaitForSeconds(1);
         animator.SetBool("Bouncing", false);

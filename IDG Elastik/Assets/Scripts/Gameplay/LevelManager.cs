@@ -33,6 +33,12 @@ public class LevelManager : MonoBehaviour
         }
     }
 
+    private void OnDestroy()
+    {
+        if (instance == this)
+            instance = null;
+    }
+
     public static LevelManager Get()
     {
         return instance;

@@ -10,7 +10,7 @@ public class GameManager : MonoBehaviour
     public int levelsPassed = 0;
     public int allLevels = 10;
 #if UNITY_ANDROID
-    PluginManager pluginManager;
+    PluginManager plugin;
 #endif
     private void Awake()
     {
@@ -30,10 +30,19 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
 #if UNITY_ANDROID
-        PluginManager plugin = gameObject.AddComponent<PluginManager>();
-        levelsPassed = plugin.TestPlugin(3);
+#if !UNITY_EDITOR
+        plugin = PluginManager.Get();
+        levelsPassed = plugin.GetLvlsPassed();
+#endif
 #endif
     }
+
+    private void OnDestroy()
+    {
+        if (instance == this)
+            instance = null;
+    }
+
     public int nextSceneToLoad;
     public void LoadSpecificScene(int nextSceneNum)
     {
@@ -47,6 +56,13 @@ public class GameManager : MonoBehaviour
     public void UpdateLevelsWon(int levelWon)
     {
         if (levelWon > levelsPassed)
+        {
             levelsPassed++;
+#if UNITY_ANDROID
+#if !UNITY_EDITOR
+            plugin.SaveLvlsPassed(levelsPassed);
+#endif
+#endif
+        }
     }
 }
